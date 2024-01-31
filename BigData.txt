@@ -1,0 +1,802 @@
+Prerequisites required are -- u should know basic python like datatypes , variables,if else, loops,
+SQl.
+
+google sheet with all the details-- 
+https://drive.google.com/drive/folders/1e6apIAT2T6l0-IHm8KMrMAHWDJWx0gxz
+This contains few datasets, documents,
+project.pdf contains certain questions, as topics gets completed, u can solve them.
+Now,in the resources folder, there is installation folder.
+In company our job is to write queries and not to install softwares.
+But herre you will be installing softwares.So in installation folder,
+there are 4 videos,watch it and do the installation.
+
+now,if u  get virtualization related error, BIOS setup.pdf has information
+shared in it. 
+
+What is Bigdata?-- what do u understand by big data?--
+earlier ,we used to store our information in harddisks, servers,
+Best examle is sql-- we used this to store and analyze our data.
+The amount of data was small. 
+Wit the changing time we are producing 40 exbyte per month-
+kb,mb,gb,terabyte,petabyte,exabyte 2^70 bytes.
+If the data is very big, then it is
+analyzed with the help of 5 v's volume, velocity,veracity,etc which we will
+discuss later. Earlier the data was generated slowly, inputted slowly and all
+these made creating table schema was easy.like what should be primary key,
+what foreign key,cols,etc. So SQL tools like MySQL, PostGRE Sql,etc ruled market.
+
+Now,after internet ,we started generating data at a very high speed.
+in lage quantities.Also the data is not structured anymore.
+It could be graphs,audio,video,pictures,etc.
+
+So we require big data tools like hadoop,hive,pig,etc and many others
+which are used to store and process data which rdbms fails to process.
+
+So, wecan say, big data refers to data sets that are too large
+or complex to be dealt with by traditional processing application software.
+or we can also say that large amount of data coming frommultiple sources,
+and are of various typesand categories,is known as bigdata.
+ 
+Now,big data analytics is using the tools like hadoop,hive,pig,etc for 
+storing the data,analysing the data. Here we examine the large and complex data
+to uncover the hidden patterns correlation and other insights in order tomake better 
+business decisions by using various tools 
+and techniques resulting in improved efficiency, operation,
+customer satisfaction,etc.
+
+
+Now there are 5 v's to analyse,whether 
+the data that we have is a big data or not--
+5V's of Bigdata----
+1.Volume-- it is related to quantity of generated
+and stored data.U can say data flowin terabytes.
+2.Variety-- Now we have data in terabytes but it is very structured.
+i.e. all the data has same cols, only the number of rows are huge.
+In that case also,we cannot exactly say its a big data.
+So, second thing is variety. SO variety can be in the form of
+source like lets say im getting some data from some social media handles,
+from some websites,from customer care departments that they are handling
+complaints, i.e. i'm getting data from many different channels,
+then we can have variety in the form of data like audio,video,etc.
+So we can say type and nature of data like structured data 
+which is easiest to handle and we donot get it quite often like
+excel or csv files,Semi-structured like xml 
+or json files,which is not perfectly structured
+but atleast we have key-value pairs where we can force it to be 
+structured. Then we have unstructured data-- this could be video
+or audio file,graphs where there is absolutely no structure.
+If we have data of all these 3 types then we have variety also.
+
+3. Velocity-- NOw lets say i have variety but my data is generated 
+very slowly. like generating 20 rows of data only then we can use sql  
+forcefully. Data generated at a very high speed has high velocity.
+Many times when the speed is very fast, the data is not processed 
+immediately instead it is processed later. For eg collecting data everyday
+and processing it on the last day of year. Then also its not big data.
+Take eg like in a social media we have trending page, trending songs in youtube,
+i.e. the data is getting gnerrated at a very high spped like millions of watch
+and then it is processed to take out trending one. Nowthis has to happen in real 
+time.
+If a video is popular today and if u see that as trending 2 months later,
+then thats not correct.
+4.Veracity-- lets say we have a task of sentiment analysis and
+we have gathered data from various sources ,now how to know if its from genuine customer,
+not from competitors, orour own employee,etc.
+So there is no way of knowing the data that we are collecting
+are from valid source and good enough for analyzing .So veracity deals with reliability
+ or truthfulness of collected data. 
+5.Value--It deals with analysis that we have done is of value or not.
+Lets say for negative sentiment, if know the reason then it could be of value.
+If the analysis is not valuable ,then there is no point of going through it.
+
+So bigdata is complex and large that we cannot use traditional softwares.
+
+For every V, wehave a different metric.
+
+So this was about What is Bigdata Analytics and Need for Bigdata Analytics.  
+
+----Now, Stages for Bigdata Analytics--
+Lets's say if we have a project in big data analytics, then 
+1st step is Business Problem Definition. Here all the stakeholders
+are involved.Here u decide what is the value that you need at the end.
+The budget of project,number of people working etc are decided.
+
+2nd step is data definition.Lets say for sentiment analysis,
+we can get data from our own website. or feedback forms,
+reviewing websites, customer carewebsites, google rviews, etc
+So at this stage we decide that these are the datasets that we require
+and at 3rd stage i.e. data acquisition stage and filtering-- we get the data
+and select only that which is imp. Veracity is very imp here
+to check the reliability of data.
+Finally 4th we have data extraction-- Here from aquired data
+we extract important parts. like from google reviews we can extract 
+data like name of the person,their profile picture,the review that they 
+have written, date time,etc But what we are interestedin is
+sentiments , so we can keep no.of stars., review text and not other fields.
+Then 5th we have data munging where we start cleaning the data.like missing 
+values, datatype changing, remove certain rows,etc
+
+then 6th is data aggregation and representation.-- So after cleaning ,weneed
+tocombine or merge or append the data.
+
+then 7th data analytics--to find % of +ve and -ve reviews.
+We can fing most +ve or -ve words in reviews.
+Som demographic analysis like gender based,place based review.etc.
+
+Now, we have learnt ml,thats why we know skewness, outliers, etc concept.
+But we need to our observation into more understandable format.
+So 8th comes data visualization. Tableau is generally used with bigdata.
+powebi gets little slow.
+
+Then 9th comes utilization of analysis result.
+lets say if certain staff is rude then we can do staff training.
+
+These are the few stages ofbig data analytics. 
+
+ 
+----Type of Bigdata Analytics --
+
+Descriptive analytics, diagnostic analytics, 
+predictive analytics, prescriptive analytics
+
+In terms of efforts and value to the company,
+where efforts as in amount of work u have to do to
+actually complete the prject. Then the simplest
+project that we get is descriptive. The efort 
+and value both are low like quarterly analysis,
+etc.Here the goal is not very complicated.
+The goal is just to understand the data.
+
+A little complicated then descriptive is diagnostic.
+Its kind of a medical term.It is little difficult but
+add more value to the company. For eg lets say
+uber when was first launched, wasfacing issue that
+drivers were not ready to go to airports. can you analyze 
+why?or come up with reasons-- lets say we increases charges by
+1.5x,.
+
+Next one is predictive analysis. For ex. with the help
+of sales data frompast year,u can predict data for next year.    
+
+Most high value high effort project is Prescriptive.
+So just like doctors, first we tries to find out whats
+the problem and then we try to find the solution using data.
+
+Above are the types of Bigdata Analytics.
+
+----Application of Bigdata Analytics--
+healthcare,finance and bankin, space research,
+research and development,smart traffic systems,
+secure air trafic systems,sself driving cars where
+i/p is from cameras and sensors,education,
+smart electric meters, environment,
+virtual personal asistants,IOT, recommendation engines,
+,etc.
+
+-----Problems with Bigdata Analytics- like why I cant use traditional 
+softwares.
+storing exponentialy growing huge datasets,
+processing data having complex structure like 
+structured, semi-structured,unstructured,
+processing data faster
+
+Hadoop as a solution--
+Hadoop is a framework that allows us to store and process
+larege sets of data in parallel and distributed fashion.
+It has 2 parts-- 1.hdfs and 2. mapreduce.
+HDFS allows to dump any kind of data across the cluster.
+MapReduce allows parallel processing of data
+stored in HDFS.
+
+ 1st-- most of it is unstructured so we cannot store it in table.
+So here we use HDFS or hadoop distributed filesystem to save data.
+just like in computers we have folders and inside that we have files,
+in the same way we have HDFS and it doesnot enforce any schema.
+and Hadoop doesnot enforce any schema just like our file explorer.
+Folders are called directories. The traditional s/w does vertical scaling,
+let's say we have server capable of storing 50 GB of data.
+If it gets completely filled, then what I do is purchase 
+more space lets say 100 GB , transfer old data and start using rest
+available space. This is vertical scaling. this can be efficient when
+data flow is slow. Earlier it was like the rest 50 GB took an year
+to filled but now it could take 7-8 days and get exhausted.
+
+
+So what hadoop does is horizontal scaling by 
+using multiple connected machines,lets say of 10-10
+GB which is less costly. So in horizontal scaling we
+can add another commodity hardware to the cluster,
+and going on. And it is much cheaper tothe company.
+3rd issue was processing-- so we have parallel / distributed
+processing. program needs data. lets say we have program.
+the data are in 3 computers on a cluster. Lets say 1st m/c takes 15
+mins to send all the data to processing m/c,
+and then it will send results back .. for this time, the other machines are waiting.
+Now if at once u send all the data from3 clusters to m/c which has program,
+it might break down. But hadoop is very smart. It has a technique called map reduce
+So because of map-reduce we can send program to data. Now because each system in cluster
+has its own copy of program, that'swhy wait 
+time for 1st one because of others is also low.
+
+So these were the problems which hadoop solved.
+ 
+So we can say out of 3 problems of big data,HDFS solves 2
+while MapReducing solves problemof processing data faster.
+--------2 Hrs
+
+---  So now understanding What is Hadoop?--- Apache hadoop, 
+is an open sourceframework which is implemented injava lang.
+It provides distributed storage which is handled by HDFS where,
+
+apache is a s/w foundation which maintains open source s/w.
+open-source means its free. but somethign like cloudera hadoop
+took apache hadoop code, made some changes to it and sold it 
+as a premium subscrition based product.
+So, apache hadoop is a collection of open source software
+utilities that facilitates using a network of comps to solve
+problems involving massive amounts of data and computation.
+
+Lets say we have 1TB of Data, when we try to store it
+using Hadoop, it breaks the data into smaller segments
+and then store into commodity h/ws.
+
+show commodity h/w picture, usb ports are there,connect with
+with laptop,configure it , like these wehave many to form clusters.
+and we keep themin racks. Now hadoop ismeant to be 
+working with commodity h/w because since it is cheap,its also 
+of low quality. So what hadoop does is it automatically takes 
+backup of data. So even if 1 m/c stops working, it will have a 
+backup ready and u will not loose ur data.
+
+--Hadoop Architecture--- hadoop common utilities,HDFS,YARN,MapReduce
+
+1 st Hadoop common utilities-- when we download hadoop, this also gets
+downloaded. It contains libraries and utilities needed by other
+hadoop modules. They work in the background. These are generally Java library files
+which is required by other modules to work.
+It is also required to start and to maintain the performance of hadoop.
+
+
+2nd Hadoop distributed file system or hdfs-- it is a part of 
+hadoop that deals with storage where the data is distributed acros 
+multiple machines i.e. commodity m/cs.
+This is based on Google Filesystem, and allows us to create
+replica of the data to prevent data loss as backup.
+and provides distribbuted storage.
+
+3. YARN- Yet Another Resource Negotiator- It does the job scheduling and 
+also manages the resources.
+
+4.Map-reduce- Based on Yarn, it provides the distributed 
+and parallel processing.
+Now once we store that ,next we want to process it, for that we
+have map-reduce.Map-reduce isa programming framework that enables
+parallel processing. Earliermap-reduce programs werewritten
+in java only but now, it can be in any lang.
+We will use python. 
+
+So,we can say hadoop provides simple programming model.
+nd also it provides local computation and storage.
+
+Now,map reduce-- it does the processing part.
+Map reduce has 3 phases-- 
+map phase-- here we createkey value pairs.
+shuffle phase-- this happens automatically. U dont have to write
+logic for it. Here basically the data is sorted by keys.
+reduce phase-- aggregates the values based on keys.
+
+Lets say we have a wordcount problem, wherre wewant to count frequency
+of each word. eg. hello world hello how are you world 
+so 1sst phase is map phase-- 
+(hello,1) (world,1) (hello,1) (how,1) (are,1) (you,1) (world,1)
+The program for map phase we will write.The o/pof this phase is 
+shuffle phase i/p.
+shuffle phase this is done with the help of key. So here it will
+be done alphabetically. (are,1)(hello,1)(hello,1)
+(how,1)(world,1)(world,1)(you,1)
+reduce phase--here the values are aggregated based on keys.
+i.e. we will do some mathematical operation.
+(are,1)(hello,2)(how,1)(world,2)you,1)
+and we have final answer.
+
+Framework are rules for writing the program.
+Here we need tothink about what will be the logic for 
+map and for reduce.
+
+Earlier we had only these 3 phases.but then wefaced
+few issues.lets say we have map , and in commodity h/w,
+already some process is running and in some commodity 
+machine, no process is running, then map-reduce
+is not smart enough to map to the m/c which doesnot
+have any process. Map simply maps to m/c where it finds
+the data first irespective if any process is running in 
+that h/w. We can say,map-reduce is not that smart.
+ So after 2012,hadoop introduced YARN.
+Yet Another Resource Negotiator. SO now when we
+run Map-reduce program,it goes to YARN first..  
+This YARN knows about the commodity cluster. Its
+a resource negoiator,it manage resources of cluster
+i.e. storage,processing everything. It will 
+see where the data is there and processor is free.
+So YARN is responsible for managing computing resources
+in the cluster in an efficient way.
+
+Then in 2020 , we got another update i.e. hadoop ozone--
+Consider the cluster of machines.Now forsome reason,
+this cluster goes down. These machines still has data,
+but this configuration is lost, so earlier
+we knew where the backup of the data is, first 50lines of
+data,next 50 lines of data,but now that
+connection is gone, we donot know which m/c has
+which data. SO what hadoop does is ,it maintains
+an object store of the cluster. It remembers
+configurations from different ip addresses of machine.
+So the moment this happens, we can goto hadoop ozone,
+and restore the cluster. Because this has all
+the configurations stored as an object.
+So we can say its kind of backup for all the clusterconfigurations.
+So we can say Hadooopozone acs asan object store for hadoop.
+
+Now, how data is stored in hadoop-- So uhave
+network of comps..and u have terabytes of file.
+So first hadoop will break data into blocks.
+Each ofthis part will be storedin a different 
+m/c. We call each these parts-- block.
+The default block size is 128 mb, if commodity 
+m/cs doesn't have enough memory then we can change
+the block size as well.i.e.wecan increase/decrease 
+this block size. 
+Another thing is backup,  backup is called replication.
+The replication by default is 3. i.e 2 backups and 1 original
+data. So if any m/c stops working then they have backup.
+WE can reduce or increase this replication factor.
+in our m/cwe can keepit to 1.
+Note- the probabiltity of clusters going down is very low
+and ozone also goingdown is again rare.
+
+So,hadoop has to provide fault tolerance.
+i.e. data shoulnot be lost which is provided
+by creating replicas of data.
+Now lets say we have replicas of our data in machines.
+And we have 100 machines in our cluster.Then should we 
+tell all 100 m/cs about the machines which have the replicated
+data? no-- Solution is master-slave architecture.
+Hdfs Master-Slave Architecture 
+haddop has 1 master node, under which ther are
+many slave nodes.The technical name for this master node
+is namenode, and slavenodes are called as data nodes.
+Now, if data node gets new data,then this data node
+is supposed to tell its namenode. If any slave stops 
+working, the again namenode will know, not other slavenodes.
+So for namenode , we use high quality s/w.
+And it will not break easily. But if it breaks , so we have secondry namenode.
+The secondry namenode maintans a log of everything mantained on namenode.
+Such that if primary namenode fails, we have secondary namenode.
+
+So we have namenodes, some namenodes are chosen as master nodes whichcontain metadata
+about its slave namenodes.
+the secondary namenodes simply store logs if
+namenodes stop working. People are assigned to
+maintain it. 
+
+Now another big advantage of master slave architecture is rack awareness.
+i.e. while saving replica, all the replicas are not saved on same rack but
+on different racks. Such that , if complete rack fails,
+then too we have data available. SO in rack awareness
+we have 1 replica on same rack and one on another rack.
+ 
+
+
+***Hadoop Stack
+
+
+MapReduce -- It is based on Yarn. It provides disributed 
+and parallel processing. It has 2 phases-- map and reduce.
+Just like master slave architecture, here also we have, 
+Master Job tracker--(one)-- it schedules task based on prioriy,
+manages resources, monitor tasks.
+
+Slave task tracker(many) -- executes the task,
+provides task status.
+
+
+Working of Hadoop -- WOrking of haddop is covered in 2 phases. Data Storageby HDFS
+and data processing by mapreduce.
+******see a diagram in folder of working of hadoop*****
+We have HDFS and map reduce. Map reduce work is performed 
+by name node and data node. Name Node is managed by Resource 
+Manager and Data Node by node manager which manages all the 
+work of inside map reduce task assigned to that particular 
+datanode . 
+Now client gives location of i/p/o/p i.e 
+from where to get data and on which lave to give op
+2ndly client also provide job specification apart from these data 
+and program is also given by client to HDFS,
+which breaks data into chunks of 128 MB.
+Name node then decide under which datanode
+a particular chunk will be there.
+Now,each data node has mapreduce task,
+
+let's suppose task t is divided into chunk 1,2,3,4,5.
+These chunks are assigned to slave 1,slave 2,slave3,
+slave4,slave5. These slaves did their map reduce task
+They all produce some o/p which is stored in some data node.
+And this will be saved till the client give aread command.
+and the o/p will be dispalyed in particular location.
+
+This is how the working of hadoop is done.
+
+
+
+Hadoop Ecosystem ---  See haddop ecosystem picture in folder.
+We have seen hadoop architecture. Apart fromthem we also 
+have few others to solve the bigdata problems.
+The 4 major elements of hadoop are hdfs,yarn , map-reduce,
+and hadoop comodities.
+HDFS is hadoop Distributed FileSystem
+Yarn Yet Another Resource Negotiator. It does job scheduling.
+Map reduce which is a program based data processing.
+Spark handles in memory data processing.
+Pig and hive which we will see later but it works on 
+query based processing of data services.
+Hbase for nosql database.
+Mahout and saprk MLlib is used for ml algo,
+and ml libraries.
+solar,lucene for searching and indexing of data,
+zoo keeper for management of clusters,
+Oozie for job scheduling
+There are many more.
+
+
+
+So now, Advantages & Disadvantages of Hadoop ------
+Hadoop is nothing but master-slave architecture.
+Its adv is it is highly availability,cost effecctive,fault tolerant.
+horizontaly scalable, open source, schema independent, variety of data 
+sources, 
+
+Disadvantages of hadoop--
+1st--vulnerability because of being open-source.
+That is why it is said , if you want to install any apache big
+data tool, then dont go with the latest version instead go 
+with the stable version.
+
+2nd--because of being open source, it has security problems.
+Something known as kerberos authentication.
+It doesnot provide any encryption at storage
+and network level. So cyber attacks are possible.
+
+3rd processing overhead-- all the read/write opertions
+are done on hard disk which is very time consuming.And it can only do 
+batch processsing. For real time processing we cannot use hadoop.
+usecases which need batch processing are like bank collecting loan
+data of past year and analyzing it,credit card threshold,
+who paid, who didn't.
+
+The different changes are applied at the backend level.
+
+
+::::::::::::::::::::::::::::::::::::::::::::::
+Assignment  (1/2)
+
+
+2 Hrs
+Data Analysis with Pig and Hive
+
+Introduction of Hive 
+There was a problem with map-reduce, which earlir 
+said u can only write progs in java. Before big data,
+data was storeed using sql. After big data,
+distributed processing with the help of map-reduce started,
+which was not possible using sql. Also another challenge was it 
+is supposed to work in Java.Which wasanother challenge because 
+many didnt knew Java. So came hive.
+It takes sql code and write mapreduce code for it. which
+will run on hdfs. Now there are limitations 
+of sql itself. It works on structured data,needs schema,
+So there will be some differences that were expected.
+So instead of sql, we have hive query lang.(hql)--
+So hive gives sql like interface to query data 
+stored in HDFS. Developed by facebook.
+It received contributions from netflix, and finra.
+Now how this works. Obviously it willnot be same asSQL 
+word to word.So,1st we get data fromhive client.
+So basicaly whichever system we will use to write 
+a query is hive client. Its input is given to
+hive software. And the o/p of this s/w is given to HDFS.
+
+Hive s/w basically has there is hive server which receives
+the queryand starts the session. Thisquery is sent
+to hive driver. It maintains communication between all
+the different components of hive. Now this driver first
+send the query to compiler. It checks the schema of the tables.
+And the information to check it gets frommetastore.
+which stores data abut data and compiler takes its help
+to validate. So compiler asks driver and then driver asks metastore.
+which metastore will reply to driver, which will reply to compiler.
+Now if compiler approves and there are no errors. then compiler creates
+direced acyclic graphs. SO this convery query into graph
+where eachnode will be operation and edges are data flow.
+lets say we perform select * from table where condition group by condition having condition;
+so first we needto read data--> filter--> group by--> havinng--> write.
+the edges are such that cycle is not created.
+Now this is sent again to the driver, which is then sent to optimizer.
+Optimizer checks if we can make query more efficient.
+
+
+
+
+
+Directed Acyclic Graph-- If it possible to optimize the query. For eg. Instead of solving query aboove way, we can do like read-->filter-->sort-->group by-->having-->write.
+It will check if certain operation is not required then remove it. And it should be in a way that it doesn't change o/p.
+
+Now, this optimized acyclic graph is given to driver which gives it to execution engine.
+Now this execution engine converts each step of acyclic graph into map reduce code. i.e. read op is converted into map reduce, filter into map reduce, etc. And finally it will run this code on hdfs to get the o/p of the code and that o/p will be displayed on the terminal.
+
+ANd this is how hive works.
+
+Now lets see how hive deals with data--- Data Model of hive--
+So it needs database which has Table, partitions and buckets. Because it is big data , it also needs partitions and buckets.
+
+So actual data is in hdfs , its metadata is in hive.
+
+So for a query like, select * from table, the data from hdfs is pulled into hive. Then it is aranged based on schema, all the cols are pulled and that is given as o/p.
+So these tables are just like that of sql but there are 2 types of tables.
+Managed table which is the default option,
+for eg in a cmd create table mytable(....);
+this query is just like create managed table mytable(...); but writing managed is not compulsory.
+mytable is a managed table, Here in managed table, we donot control the creation and deletion of data, while in external table we do control the creation and deletion of data.
+
+So first talking about managed table--
+draw and explain-- lets say we have hice and hdfs. hive contains metadata and hdfs contains actual data. i
+So when we write command to create a table, a metastore is created which contains data about data. i.e. colnames , their datatype ,table name , etc. Then we will insert data in this table. that data will be stored in hdfs. Now in
+hdfs we have files and folders and we have path for these files and folders. eg /home/filename.txt , /user/folder.file.txt
+So this data is created by hdfs in a path decided by itself. So we donot control where our data is getting created in hdfs. But the path of stored data is shared with hive. We can write select queries aND then lets say i want to delete this table, so the metadata from hive gets deleted. and automatically the data in hdfs also gets deleted. So here we are not controlling deletion of data.
+
+Now lets say if we have external table. We wil write create external table tablename command.
+So the schema of this table gets stored in hive, and in the end we also give location where to store this data. So now we have more control over the data. Now if we delete table from hive, we can still control data in hdfs whether to delete or not.
+
+Now we want our queries to run very fast so we create partitions.
+Lets say I have a table. with cols countyr and sales. i/p India, 10; Japan 7;India 8;Japan 5; China 17.
+and I run a query- select * from table where country="India";
+Now going through all the rows gets inefficient. SO instead we create partitions. Partitions are like groupby queries. We decide a partition key like country in our case.
+Lets say 1 partition for India, So all trxs related to India will be in this partition.
+All related to Japan will be in 1.
+So in bigdata we end up saving alot of time.
+
+Now apache hive organizes tables into partitions for grouping same type of data together based on a col or partition key.
+It results in faster and effiecient queries.
+
+Buckets are generally used for continuous values and they are like bins. 0-50, 51-100, etc.
+eg. select * from tablename where sales>50;
+
+In hive, tables or partitions are subdivide into buckets based on the hash function of a col in a table to give extra structure to the data that may be used for more efficient queries.
+
+Apache Pig--
+Problem with hive is it works with structured data and not with unstructured data like audio, video, etc. So apache pig has something called as pig latin, which is very similar to sql.Filter, sort , group by, and its such that , it can work with both structured and unstructured data.
+Give your prog written in pig latin---> give it 
+to apache pig---> which will give to map reduce--->and then that will be converted to HDFS. Now this apache pig was developed at
+yahoo research. In a team, few people knew map reduce, few didnt. So those who knew created some funcs and asked others to use funcs with data and you will get o/p. ANd they named it pig in 2006. In 2007 they were approached by apache to continue with this and named apache pig. So the thing with pig latin is code efficiency is low writing code directly in map reduce.
+
+So pig is a big data tool where we can write our query in pig latin which are converted to mapreduce and executed over the data stored in hdfs. It can be used for both structured and unstructured data.
+
+Now we will see how actually this conversion happens from pig latin to map reduce.
+
+We have written our pig latin scripts.
+
+The apache pig will accept this script through grand shell.
+On the command shell only we start the grand shell.
+On running,it is first received by parser and checked if there 
+is any error. And converts pig latin cmd into directed acyclic graph.
+After the parser comes optimizer which tries to optmize dag
+and make it more effiicent.
+Next is compiler- which converts it into 
+map reduce code and thenfinally we have execution engine which convertsmap reduce code
+into executable code on hdfs.
+
+
+Data model in Pig-- We have scalar data types and complex datatypes.
+Scalar datatypes eg --integer , long, float, double, char array, byte array
+complex datatypes-- maps- which are key-value pairs eg. ["name"#"Jane","Age"#35]
+
+Tuple--(35,17,"Jane")
+Bag-- contains multiple tuples.like {("Jane",35),("Fly",45)}
+
+Pig includes the concept of data element being null.
+So if u give or don't give schema its fine.
+If schema is not given then it proecess the data
+mking the best guesses it can based on how the script treats 
+the data. 
+
+Introduction of Pig
+
+Feature of Pig --
+It provides severaloperations like filters, join,sort,etc.
+Fewer lines of code are required.
+It allows splits in the pipeline
+The data structure is multivalued,nested and richer.
+ 
+Application of Pig--
+Processing of web logs, data processing for search platforms,
+support for ad-hoc queries across large datasets,
+quick prototyping of algos for processing large datases.
+
+Component of Pig 
+Its 2 major components are Pig Latin Script Lang and a runtime engine.
+
+where pig latin script is used to express data flows.
+for eg commands like load and store.
+The job of pig is to convert the pig latin
+into a series of map reduce task.
+
+Runtime engine is a compiler that produce a series of 
+map reduce job programs,it uses hdfs to store 
+and retrieve data.So execution environments
+does distributed execution on a hadoop cluster
+and local execution in a single JVM .
+
+ 
+
+Architecture of Pig 
+Language used to analyze data in hadoop
+using pig is pig latin.
+Internally the piglatin scripts are converted 
+into many transfrmations with thehelp of
+parser,coptimizer,compiler,execution engine which
+consists of local mode and map-reduce mode.
+
+Any pig script or command in the grant shell is
+handled by parser.
+It checks syntaxes,do type checking,
+whose o/p is given inthe DAG form.
+As explained above. Fr execution, 
+pig runs in localmode and map-reduce mode
+depending on where scriptis running.
+Local mode is best suited for small datastes.
+Single JVM is neede here as all filesare stored
+and run on local host.pig -x local is a command.
+In map-reduce data is present in HDFS.
+Pig latin statements are converted into
+map reduce job.By default this mode
+is used so we dont need to specify it.
+And if u want to run grunt shell on mapreduce
+then u can simply run with pig -x mapreduce.
+
+
+Execution mechanism of pig--
+1. Ineractive mode or grunt shell
+2. batch mode or script moe
+3. embedded mode- here you can use different
+lang like java for execution.
+
+
+Data Model of Pig--
+Atom,tuple,bag,map
+atom simple values like int,long, string,
+tuple can consist of multiple datatypes
+bag consisits of many tuples,lists and can contain
+duplicate data.
+mapis like an associated array.key can be of 
+string type but value can be of any type.
+
+
+Pig Commands 
+
+
+
+Features of Hive 
+It use a SQL-like lang called HiveQL 
+By using HiveQL,multiple userscan simultaneously
+query data..
+Hive supports variety of data formats.
+It is based on notion of wrtite once andread
+many times.
+It is scalable at low cost.
+
+Client give hive queries to hive
+which converts it into mapreduce task 
+to give to hadoop map reduce.  
+
+
+Component of Hive 
+The major components of hive are
+hive client,hive service,hive sorage which  is
+a metastorage.
+The hive clients include Thrift application to 
+execute easy hive commands which are available for
+languageslike python,ruby,etc. 
+Hive has 3 types of client classification--
+JDBC,Thrift and ODBC client application.
+
+Hive services-- shell or CLI for interaction between user
+and hive ,
+driver receives queries from differe hive clients,
+and fetch jdbc or odbc driver which is 
+automatically connected with hive,
+compiler does semantic analysis on tables,
+and does map reduce,
+execution engine for processing of 
+queries.
+metastore is a central repository to store
+all the structured info of data,partitions,
+etc.
+
+Architecture ofHive--
+Hive Client write queries
+and give to Thrift.The Hive server is 
+based on thrift and client can write progin
+any of the lang that thrift supports.
+
+next we have jdbc-nex we have hive application
+and jdbc driver. lly for odbc , we have odbc driver.
+Hive driver 
+
+Data Model of Hive --consist of--
+databases,tables,partitions, buckets or clusers.
+partition is dividing table based on value of some col.
+This makes it faster todo queriesand slicing of data.
+
+
+Hive Commands 
+
+Assignment  (2/4)
+
+#######################################
+
+Sqoop-- SQL+HADOOP
+Sqoop is a toolusd to transfer bulky data between hadoop
+and external data tools such as RDBMS like MySQL.
+Sqoop is basically a middleman,that imports the data into hdfs 
+and grab the data from hdfs to export it back to rdbms.
+It uses map reduce forimport export,and works
+in parallel to support fault tolerance.
+
+Need for Sqoop--
+For data ananlysis,data is loaded from multiple sources.
+Some of the many challenges are data consisitency,loading bulking data 
+to Hadoop,ensuring efficient utilization of Hadoop,
+This is where sqoop comes.
+Sqoop helps to load bulky data fromrdbms into hdfs.
+Sqoop converts the command into mapreduce task, wwhich 
+are then ran over hdfs.
+And use YARN framework to import and export data
+which provides fault tolerance on top of parallelism.
+It is very useful for data analysis as it provides
+command line interface for higher performance.
+
+Features of Sqoop--
+Uses YARN framework for parallel import/export.
+Import results obtained on running sql query on hdfs
+to RDBMS.
+Connectors for all RDMS, MySql
+It supports kerberos Security Integration on network
+Provides full and incremental load.
+It allows compression
+Data loading directly to hive or to hbase 
+which is a nosql database.
+
+Sqoop Architecture--
+Sqoopruns in the hadoop cluster.
+client sends command which goes into sqoop.
+The command can be of import/export type.
+The data is fetched by multiple sources like 
+data warehouse, doc based systems, RDBMS, etc.
+by Hadoop. There are various connectors for
+different databases.
+Next multiple mappers map the data into Hadoop
+HDFS/HBase/Hive. So we arejust using the map function.
+Similarly export will be done.
+Once the data is loaded,u can start analyzing the data.
+
+Flume-- It is atool for data injestion in HDFS.
+It ingest streaming data from multiple sources
+like log file, social media,emails etc into HDFS.
+It is highly reliable and distributed.
+
+Need of flume-- it deals with streaming data.
+Moves large amount of streaming data fromsource to HDFS.
+
+ 
+
+
+
