@@ -3,6 +3,7 @@ SQl.
 
 google sheet with all the details-- 
 https://drive.google.com/drive/folders/1e6apIAT2T6l0-IHm8KMrMAHWDJWx0gxz
+
 This contains few datasets, documents,
 project.pdf contains certain questions, as topics gets completed, u can solve them.
 Now,in the resources folder, there is installation folder.
@@ -796,7 +797,40 @@ It is highly reliable and distributed.
 Need of flume-- it deals with streaming data.
 Moves large amount of streaming data fromsource to HDFS.
 
- 
+
+#------Hadoop
+
+Consider the following document:
+
+
+
+https://drive.google.com/file/d/1nzG0vhioPh7jTcEsvOUB7dXoPcxNiF30/view?usp=share_link
+
+
+
+Complete the following tasks in Hadoop:
+
+
+
+a. Create a new directory named 'myinput' in HDFS
+
+b. Put this file from the local file system to the 'myinput' directory on HDFS
+
+c. Write and execute a MapReduce wordcount program on the file and store the result in 'myoutput' directory
+
+d. List the contents of the root directory on HDFS
+
+e. List the contents of myinput directory on HDFS
+
+f. List the contents of myoutput directory on HDFS
+
+g. Display the contents of the result of the MapReduce program
+
+h. Store this result file on the local file system
+
+i. Delete the myinput and myoutput directories
+
+#---
 
 
 
