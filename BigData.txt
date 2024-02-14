@@ -1,3 +1,339 @@
+
+#---------------------------
+
+-intalling java
+
+sudo apt update
+sudo apt upgrade
+sudo apt install openjdk-8-jdk openjdk-8-jre
+#now adding java to path variable
+sudo gedit /etc/profile
+#a file will open scroll tothe end of the file,and write-
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+PATH=$PATH:$JAVA_HOME/bin
+export JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+PATH=$PATH:$JRE_HOME/bin
+export PATH
+
+save this file -click on cross button.
+Now on terminal--
+. /etc/profile
+java -version
+sudo apt-get update
+sudo apt-get upgrade --fix-missing
+sudo apt-get install ssh
+sudo apt-get install rsync
+ssh-keygen -t rsa
+#entr file in which to asave key-- just press enter don't do anything
+#enter passphrase: press enter again
+#Now once this is done, we will add this to authorize key
+cat /home/bigdata/.ssh/td_rsa.pub>>/home/bigdata/.ssh/authorized_keys
+ssh localhost
+#are you sure connecting-- write yes
+#now we will download Hadooop. So for that open up web browser.
+#on the activities part of ubuntu, there is mozilla browser. click on that.
+# in address bar write-- archive.apache.org/dist/hadoop/core/hadoop-2.4.1
+# click on hadoop-2.4.1.tar.gz
+#once hadoop is downloaded, double click on it.
+# select archive manager-- click on extract--extract--close
+# close archive manager as well.
+#now we have downloaded hadoop.NOw we need to configure it.
+# now from activities of ubuntu,click on files folder-- click on downloads- open hadoop 2.4.1--
+--select all the folders--click a cursor on one of the folder and right click-- select copy--
+-- click on home on the left-- right click anywhere inside home and click on new folder--
+-- folder name- hadoop--create-- double clickon hadoop-- it is empty-- right click and paste
+#now adding hadoop to path.
+#terminal: sudo gedit /etc/profile
+#password-put the pwd while creating vm
+#if above cmd is not worrking,then we can try--
+$sudo nano /etc/profile
+scroll down to end and write same codes--
+
+HADOOP_INSTALL=/home/bigdata/hadoop
+PATH=$PATH:$HADOOP_INSTALL/bin
+export PATH
+
+#now if u r using gedit, then u can simply save and close it.
+# if u r using nano, for saving- press ctrl-X
+# and press Y key on keyboard.
+and then write ma
+# and u r back to terminal.
+#to apply the changes--
+. /etc/profile
+exit
+#now configuring hadoop files--
+#In left activities,file folder, click on hadoop,
+#click on etc--click hadoop-- core-site.xml
+# it is empty rigt now.
+#indentation is very imp.
+#click your cursor at the end of configuration tag, press enter,press tab
+<configuration>
+	<property>
+		<name>fs.defaultFS</name>
+		<value>hdfs://localhost:9000</value>
+	</property>
+	<property>
+		<name>hadoop.tmp.dir</name>
+		<value>/home/bigdata/hadoop/hadoop-2.4.1/temp</value>
+	</property>
+</configuration>
+
+# now save the file, and next to save there is close.
+
+Now click on file hdfs-site.xml
+<configuration>
+	<property>
+		<name>dfs.replication</name>
+		<value>1</value>
+	</property>
+</configuration>
+
+#save and close it.
+
+#now select file mapredsite.xml--select it-- copy--
+# then right click anywhere on the empty space and click paste.
+#now right click on copied file--click  on rename--
+# rename to mapred-site.xml
+#now double click to open it.
+<configuration>
+	<property>
+		<name>mapred.job.tracker</name>
+		<value>localhost:9001</value>
+	</property>
+</configuration>
+
+save and close
+
+# edit hadoop-emv.sh
+# scroll down see export JAVA_HOME=${JAVA_HOME}
+Erase this and write--
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+
+save close
+
+#now open terminaland write-- 
+sudo gedit /home/bigdata/.bashr
+enter your pwd.
+file will open.Ignore warnings.
+Scroll to end and add the lines--
+
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export HADOOP_INSTALL=/home/bigdata/hadoop
+export HADOOP_MAPPED_HOME=$HADOOP_INSTALL
+export HADOOP_COMMON_HOME=$HADOOP_INSTALL
+export HADOOP_HDFS_HOME=$HADOOP_INSTALL
+export YARN_HOME=$HADOOP_INSTALL
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_INSTALL/lib/native
+export PATH=$PATH:$JAVA_HOME/bin
+export PATH=$PATH:$HADOOP_HOME/bin
+export PATH=$PATH:$HADOOP_INSTALL/sbin
+
+save and close
+
+#on terminal--
+. /etc/profile
+source /home/bigdata/.bashrc
+hadoop namenode -format
+
+#now starting hdfs--
+start-dfs.sh
+are you sure?yes
+
+start-yarn.sh
+
+# to check everythng started- write--
+jps
+# u will get some list.
+#There should be datanode, namenode and secondary namenode 
+resource manager and nodemanager in this list.
+
+#to stop all of these. Write--
+stop-dfs.sh
+stop-yarn.sh
+touch /home/bigdata/samplefile.txt
+
+#now from activity,goto home->bigdata-> cick samplefile.txt
+# adding some random text in this file 
+
+BigDAta, Data Analytics, Text Analytics, Big Anaytics
+
+save and close
+
+Then we can write mapreduce program based on this.
+
+Now since we will write a map-reduce prog using python.
+We need to install python as well.
+
+So in terminal--
+sudo apt update
+password--enter pwd of vm. press enter. 
+sudo apt upgrade
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+press enter
+sudo apt install python3.7
+enter
+press y then enter
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 2
+python --version
+
+
+So now we can do practical of map reduce.
+
+#-- APACHE PIG----
+
+in ubuntu mozilla--address bar--
+
+archive.apache.org/dist/pig/pig-0.15.0/
+
+click pig-0.15.0.tar.gz
+
+once downloaded,double click--extract--extract--close
+close archive manager as well.
+
+open files folder--downloads--click pig-0.15-0--
+select everything inside this directory--
+keep cursor on one of the folders--right click--copy
+
+Now goto home-- right click anywhere onthe white sapce-- 
+new folder-- name it pig -- create-- click this folder--
+right click-- paste
+
+
+# now we will add path variable--
+al+ctrl+t
+sudo gedit /etc/profile
+type pwd -- enter
+
+scroll to end
+
+export PIG_HOME=/home/bigdata/pig
+export PATH=$PATH:$PIG_HOME/bin
+
+save and close
+
+# now editing bash files--
+sudo gedit /home/bigdata/.bashrc
+
+scroll to end and write--
+
+export PIG_HOME=/home/bigdata/pig
+export PATH=$PATH:$PIG_HOME/bin
+
+save and cross
+
+. /etc/profile
+source /home/bigdata/.bashrc
+touch /home/bigdata/user_data.csv
+
+files-->home--> click on user_data.csv
+entering some random data like--
+15624518,"Male",19,19000,0
+15010944,"Male",15,20000,0
+15068565,"Female",20,57000,0
+15063246,"Female",27,43000,0
+15064062,"Male",19,76000,0
+
+save and close
+
+And now we are redy for pig practcal .
+
+#------------------- Apache hive---
+
+mozilla--address bar-- archive.apache.org/dist/hive/hive-0.14.0
+
+click on apache-hive-0.14.0-bin.tar.gz
+once downloaded,double click--extract--extract--close-closearchivemanager
+
+files--downloads--double click apache-hive-0.14.0--select everything--
+right click on any folder--copy--
+go to home--click on white space--new folder--hive-- create
+
+open this folder and click paste
+
+ctrl+alt+t
+
+sudo gedit /etc/profile
+
+scroll to end-- 
+
+HIVE_HOME=/home/bigdata/hive
+PATH=$PATH:$HIVE_HOME/bin
+export HIVE_HOME
+export PATH
+
+save and close
+
+files--hive folder-- conf-- 
+select hive-env.sh -- right click--  copy-- paste
+click again to copied file-- rename-- hive-env.sh
+now double click-- line no.48--
+HADOOP_HOME=/home/bigdata/hadoop
+
+line 51--
+export HIVE_CONF_DIR=/home/bigdata/hadoop/etc/hadoop
+
+save and close
+
+now hive-default.xml.template-- select this file-- 
+right click-- copy-- right click on white space-- paste it--
+rename to-- hive-site.xml ---double click on it--
+
+press ctrl F in file and search for-- hive.metastore.uris--
+
+#approx lineno. 328--
+<name>hive.metastore.urls</name>
+<value>thrift://localhost:9083</value>
+
+press ctrlF --hive.metastore.schema.verification
+approx line 530--
+<value>false</value>
+
+ctrlF-- hive.supported.concurrency
+approx 2160
+<value>true</value>
+
+ctrl F--hive.enforce.bucketing
+approx 2243 but this is not the property we need. So press down arrow--
+approx line 1674--
+<value>true</value>
+
+ctrlF-- hive.exec.dynamic.partition.node--
+click on down button-- approx 207
+<value>nonstrict</value>
+
+ctrl F-- hive.txn.manager-- approx 2238
+<value>org.apache.hadoop.hive.ql.lockmgr.DbTxnManager</value>
+
+ctrl F-- hive.compactor.initiator.on
+press down--approx 2271
+<value>true</value>
+
+ctrl F-- hive.compactor.worker.threads-- approx 2281
+<value>1</value>
+
+save cross
+
+terminal--
+
+sudo gedit /home/bigdata/.bashrc
+
+at the end of file--
+
+export HIVE_HOME=/home/bigdata/hive
+export PATH=$PATH:$HIVE_HOME/bin
+
+save cross
+
+terminal-- 
+. /etc/profile
+source /home/bigdata/.bashrc
+
+practical for hive--
+
+#---------------------------
+
+
 Prerequisites required are -- u should know basic python like datatypes , variables,if else, loops,
 SQl.
 
@@ -44,7 +380,6 @@ to uncover the hidden patterns correlation and other insights in order tomake be
 business decisions by using various tools 
 and techniques resulting in improved efficiency, operation,
 customer satisfaction,etc.
-
 
 Now there are 5 v's to analyse,whether 
 the data that we have is a big data or not--
@@ -179,22 +514,16 @@ softwares.
 storing exponentialy growing huge datasets,
 processing data having complex structure like 
 structured, semi-structured,unstructured,
-processing data faster
 
-Hadoop as a solution--
-Hadoop is a framework that allows us to store and process
-larege sets of data in parallel and distributed fashion.
-It has 2 parts-- 1.hdfs and 2. mapreduce.
-HDFS allows to dump any kind of data across the cluster.
-MapReduce allows parallel processing of data
-stored in HDFS.
 
  1st-- most of it is unstructured so we cannot store it in table.
 So here we use HDFS or hadoop distributed filesystem to save data.
 just like in computers we have folders and inside that we have files,
 in the same way we have HDFS and it doesnot enforce any schema.
 and Hadoop doesnot enforce any schema just like our file explorer.
-Folders are called directories. The traditional s/w does vertical scaling,
+Folders are called directories.
+
+2nd- The traditional s/w does vertical scaling,
 let's say we have server capable of storing 50 GB of data.
 If it gets completely filled, then what I do is purchase 
 more space lets say 100 GB , transfer old data and start using rest
@@ -202,13 +531,15 @@ available space. This is vertical scaling. this can be efficient when
 data flow is slow. Earlier it was like the rest 50 GB took an year
 to filled but now it could take 7-8 days and get exhausted.
 
+processing data faster---- 
 
 So what hadoop does is horizontal scaling by 
 using multiple connected machines,lets say of 10-10
 GB which is less costly. So in horizontal scaling we
 can add another commodity hardware to the cluster,
 and going on. And it is much cheaper tothe company.
-3rd issue was processing-- so we have parallel / distributed
+
+3rd- issue was processing-- so we have parallel / distributed
 processing. program needs data. lets say we have program.
 the data are in 3 computers on a cluster. Lets say 1st m/c takes 15
 mins to send all the data to processing m/c,
@@ -219,13 +550,27 @@ So because of map-reduce we can send program to data. Now because each system in
 has its own copy of program, that'swhy wait 
 time for 1st one because of others is also low.
 
+
+
 So these were the problems which hadoop solved.
  
 So we can say out of 3 problems of big data,HDFS solves 2
 while MapReducing solves problemof processing data faster.
+
+
 --------2 Hrs
 
----  So now understanding What is Hadoop?--- Apache hadoop, 
+
+Hadoop as a solution--
+Hadoop is a framework i.e. collection of softwares
+using which we can use network of computers that allows us to store and process
+larege sets of data in parallel and distributed fashion.
+It has 2 parts-- 1.hdfs and 2. mapreduce.
+HDFS allows to dump any kind of data across the cluster.
+MapReduce allows parallel processing of data
+stored in HDFS.
+
+Apache hadoop, 
 is an open sourceframework which is implemented injava lang.
 It provides distributed storage which is handled by HDFS where,
 
@@ -250,6 +595,7 @@ backup of data. So even if 1 m/c stops working, it will have a
 backup ready and u will not loose ur data.
 
 --Hadoop Architecture--- hadoop common utilities,HDFS,YARN,MapReduce
+and also hadoop ozone whih is added quite recently.
 
 1 st Hadoop common utilities-- when we download hadoop, this also gets
 downloaded. It contains libraries and utilities needed by other
@@ -318,25 +664,28 @@ run Map-reduce program,it goes to YARN first..
 This YARN knows about the commodity cluster. Its
 a resource negoiator,it manage resources of cluster
 i.e. storage,processing everything. It will 
-see where the data is there and processor is free.
+see where the data is there and which processor is free.
 So YARN is responsible for managing computing resources
 in the cluster in an efficient way.
 
 Then in 2020 , we got another update i.e. hadoop ozone--
+Hadoop ozone is kind of a backup of a cluster.
+
 Consider the cluster of machines.Now forsome reason,
 this cluster goes down. These machines still has data,
 but this configuration is lost, so earlier
 we knew where the backup of the data is, first 50lines of
 data,next 50 lines of data,but now that
 connection is gone, we donot know which m/c has
-which data. SO what hadoop does is ,it maintains
+which data. 
+SO what hadoop ozone does is ,it maintains
 an object store of the cluster. It remembers
 configurations from different ip addresses of machine.
 So the moment this happens, we can goto hadoop ozone,
 and restore the cluster. Because this has all
 the configurations stored as an object.
 So we can say its kind of backup for all the clusterconfigurations.
-So we can say Hadooopozone acs asan object store for hadoop.
+So we can say Hadoopozone acts asan object store for hadoop.
 
 Now, how data is stored in hadoop-- So uhave
 network of comps..and u have terabytes of file.
@@ -347,13 +696,15 @@ The default block size is 128 mb, if commodity
 m/cs doesn't have enough memory then we can change
 the block size as well.i.e.wecan increase/decrease 
 this block size. 
-Another thing is backup,  backup is called replication.
+Another thing is backup of blocks,  backup is called replication.
 The replication by default is 3. i.e 2 backups and 1 original
 data. So if any m/c stops working then they have backup.
 WE can reduce or increase this replication factor.
 in our m/cwe can keepit to 1.
 Note- the probabiltity of clusters going down is very low
 and ozone also goingdown is again rare.
+
+Now next is Fault Tolerance-- 
 
 So,hadoop has to provide fault tolerance.
 i.e. data shoulnot be lost which is provided
@@ -362,12 +713,18 @@ Now lets say we have replicas of our data in machines.
 And we have 100 machines in our cluster.Then should we 
 tell all 100 m/cs about the machines which have the replicated
 data? no-- Solution is master-slave architecture.
-Hdfs Master-Slave Architecture 
+
+Hdfs Master-Slave Architecture ------------------
+
 haddop has 1 master node, under which ther are
-many slave nodes.The technical name for this master node
+many slave nodes. The slave nodes contain actual data.
+The technical name for thie master node
 is namenode, and slavenodes are called as data nodes.
 Now, if data node gets new data,then this data node
-is supposed to tell its namenode. If any slave stops 
+is supposed to tell its namenode.
+SO we can say namenode only contains metadata i.e. data about data.
+i.e. which ip addr has which data, in which data node replica is stored,
+which slave nodes are alive ,which are dead, etc. If any slave stops 
 working, the again namenode will know, not other slavenodes.
 So for namenode , we use high quality s/w.
 And it will not break easily. But if it breaks , so we have secondry namenode.
@@ -382,10 +739,13 @@ maintain it.
 
 Now another big advantage of master slave architecture is rack awareness.
 i.e. while saving replica, all the replicas are not saved on same rack but
-on different racks. Such that , if complete rack fails,
+on different racks by namenode. Such that , if complete rack fails, 
+because of short ckt, electricity off,etc
 then too we have data available. SO in rack awareness
 we have 1 replica on same rack and one on another rack.
- 
+
+
+This rack awareness is the result of Master-Slave arch.
 
 
 ***Hadoop Stack
@@ -475,8 +835,9 @@ data of past year and analyzing it,credit card threshold,
 who paid, who didn't.
 
 The different changes are applied at the backend level.
+::::::::::::::::::::::::::::::::::::::::::::::::
 
-
+We can do practical here----
 ::::::::::::::::::::::::::::::::::::::::::::::
 Assignment  (1/2)
 
@@ -501,22 +862,31 @@ So hive gives sql like interface to query data
 stored in HDFS. Developed by facebook.
 It received contributions from netflix, and finra.
 Now how this works. Obviously it willnot be same asSQL 
-word to word.So,1st we get data fromhive client.
+word to word.
+
+So,1st we get data fromhive client.
 So basicaly whichever system we will use to write 
 a query is hive client. Its input is given to
 hive software. And the o/p of this s/w is given to HDFS.
 
 Hive s/w basically has there is hive server which receives
-the queryand starts the session. Thisquery is sent
-to hive driver. It maintains communication between all
-the different components of hive. Now this driver first
+the query and starts the session.
+
+Thisquery is sent to hive driver. 
+It maintains communication between all
+the different components of hive.
+
+Now this driver first
 send the query to compiler. It checks the schema of the tables.
 And the information to check it gets frommetastore.
 which stores data abut data and compiler takes its help
 to validate. So compiler asks driver and then driver asks metastore.
 which metastore will reply to driver, which will reply to compiler.
+
 Now if compiler approves and there are no errors. then compiler creates
-direced acyclic graphs. SO this convery query into graph
+direced acyclic graphs. 
+
+SO this convery query into graph
 where eachnode will be operation and edges are data flow.
 lets say we perform select * from table where condition group by condition having condition;
 so first we needto read data--> filter--> group by--> havinng--> write.
@@ -524,39 +894,55 @@ the edges are such that cycle is not created.
 Now this is sent again to the driver, which is then sent to optimizer.
 Optimizer checks if we can make query more efficient.
 
-
-
-
-
-Directed Acyclic Graph-- If it possible to optimize the query. For eg. Instead of solving query aboove way, we can do like read-->filter-->sort-->group by-->having-->write.
+Directed Acyclic Graph-- If it possible to optimize the query. 
+For eg. Instead of solving query aboove way, we can do like read-->filter-->sort-->group by-->having-->write.
 It will check if certain operation is not required then remove it. And it should be in a way that it doesn't change o/p.
 
 Now, this optimized acyclic graph is given to driver which gives it to execution engine.
-Now this execution engine converts each step of acyclic graph into map reduce code. i.e. read op is converted into map reduce, filter into map reduce, etc. And finally it will run this code on hdfs to get the o/p of the code and that o/p will be displayed on the terminal.
+
+Now this execution engine converts each step of acyclic graph into map reduce code. 
+i.e. read op is converted into map reduce, filter into map reduce, etc. 
+
+And finally it will run this code on hdfs to get the o/p of the code and that o/p will be displayed on the terminal.
 
 ANd this is how hive works.
 
 Now lets see how hive deals with data--- Data Model of hive--
-So it needs database which has Table, partitions and buckets. Because it is big data , it also needs partitions and buckets.
+So it needs database which has Table, partitions and buckets.
+Because it is big data , it also needs partitions and buckets.
 
 So actual data is in hdfs , its metadata is in hive.
 
-So for a query like, select * from table, the data from hdfs is pulled into hive. Then it is aranged based on schema, all the cols are pulled and that is given as o/p.
+So for a query like, select * from table, the data from hdfs is pulled into hive. 
+Then it is aranged based on schema, all the cols are pulled and that is given as o/p.
 So these tables are just like that of sql but there are 2 types of tables.
+
+
 Managed table which is the default option,
 for eg in a cmd create table mytable(....);
 this query is just like create managed table mytable(...); but writing managed is not compulsory.
-mytable is a managed table, Here in managed table, we donot control the creation and deletion of data, while in external table we do control the creation and deletion of data.
+mytable is a managed table,
+Here in managed table, we donot control the creation and deletion of data, 
+while in external table we do control the creation and deletion of data.
 
 So first talking about managed table--
 draw and explain-- lets say we have hice and hdfs. hive contains metadata and hdfs contains actual data. i
-So when we write command to create a table, a metastore is created which contains data about data. i.e. colnames , their datatype ,table name , etc. Then we will insert data in this table. that data will be stored in hdfs. Now in
+So when we write command to create a table, a metastore is created which contains data about data. i.e. colnames , their datatype ,table name , etc. 
+Then we will insert data in this table. that data will be stored in hdfs. 
+
+Now in
 hdfs we have files and folders and we have path for these files and folders. eg /home/filename.txt , /user/folder.file.txt
-So this data is created by hdfs in a path decided by itself. So we donot control where our data is getting created in hdfs. But the path of stored data is shared with hive. We can write select queries aND then lets say i want to delete this table, so the metadata from hive gets deleted. and automatically the data in hdfs also gets deleted. So here we are not controlling deletion of data.
+So this data is created by hdfs in a path decided by itself.
+ So we donot control where our data is getting created in hdfs. But the path of stored data is shared with hive. 
+We can write select queries aND then lets say i want to delete this table, so the metadata from hive gets deleted. 
+and automatically the data in hdfs also gets deleted. So here we are not controlling deletion of data.
 
 Now lets say if we have external table. We wil write create external table tablename command.
-So the schema of this table gets stored in hive, and in the end we also give location where to store this data. So now we have more control over the data. Now if we delete table from hive, we can still control data in hdfs whether to delete or not.
+So the schema of this table gets stored in hive, and in the end we also give location where to store this data. 
+So now we have more control over the data. 
+Now if we delete table from hive, we can still control data in hdfs whether to delete or not.
 
+Partitions---
 Now we want our queries to run very fast so we create partitions.
 Lets say I have a table. with cols countyr and sales. i/p India, 10; Japan 7;India 8;Japan 5; China 17.
 and I run a query- select * from table where country="India";
@@ -568,25 +954,38 @@ So in bigdata we end up saving alot of time.
 Now apache hive organizes tables into partitions for grouping same type of data together based on a col or partition key.
 It results in faster and effiecient queries.
 
+Buckets---
 Buckets are generally used for continuous values and they are like bins. 0-50, 51-100, etc.
 eg. select * from tablename where sales>50;
 
-In hive, tables or partitions are subdivide into buckets based on the hash function of a col in a table to give extra structure to the data that may be used for more efficient queries.
+In hive, tables or partitions are subdivide into buckets based on the hash function of a col in a table 
+to give extra structure to the data that may be used for more efficient queries.
+
+After this we have hive practical,which we will do later.
+
 
 Apache Pig--
-Problem with hive is it works with structured data and not with unstructured data like audio, video, etc. So apache pig has something called as pig latin, which is very similar to sql.Filter, sort , group by, and its such that , it can work with both structured and unstructured data.
-Give your prog written in pig latin---> give it 
-to apache pig---> which will give to map reduce--->and then that will be converted to HDFS. Now this apache pig was developed at
-yahoo research. In a team, few people knew map reduce, few didnt. So those who knew created some funcs and asked others to use funcs with data and you will get o/p. ANd they named it pig in 2006. In 2007 they were approached by apache to continue with this and named apache pig. So the thing with pig latin is code efficiency is low writing code directly in map reduce.
+Problem with hive is it works with structured data and not with unstructured data like audio, video, etc. 
+So apache pig has something called as pig latin, which is very similar to sql.Filter, sort , group by, and its such that , 
+it can work with both structured and unstructured data.
 
-So pig is a big data tool where we can write our query in pig latin which are converted to mapreduce and executed over the data stored in hdfs. It can be used for both structured and unstructured data.
+Give your prog written in pig latin---> give it 
+to apache pig---> which will give to map reduce--->and then that will be converted to HDFS. 
+Now this apache pig was developed at
+yahoo research. In a team, few people knew map reduce, few didnt. 
+So those who knew created some funcs and asked others to use funcs with data and you will get o/p. 
+ANd they named it pig in 2006. In 2007 they were approached by apache to continue with this and named apache pig. 
+So the thing with pig latin is code efficiency is low writing code directly in map reduce.
+
+So pig is a big data tool where we can write our scripts in pig latin which are converted to mapreduce 
+and executed over the data stored in hdfs. It can be used for both structured and unstructured data.
 
 Now we will see how actually this conversion happens from pig latin to map reduce.
 
 We have written our pig latin scripts.
 
-The apache pig will accept this script through grand shell.
-On the command shell only we start the grand shell.
+The apache pig will accept this script through grunt shell.
+On the command shell only we start the grunt shell.
 On running,it is first received by parser and checked if there 
 is any error. And converts pig latin cmd into directed acyclic graph.
 After the parser comes optimizer which tries to optmize dag
@@ -680,11 +1079,15 @@ duplicate data.
 mapis like an associated array.key can be of 
 string type but value can be of any type.
 
-
+########################-- Pig practical----
 Pig Commands 
+---------------
 
+Start vm.
 
+Goto files folder
 
+############################################
 Features of Hive 
 It use a SQL-like lang called HiveQL 
 By using HiveQL,multiple userscan simultaneously
