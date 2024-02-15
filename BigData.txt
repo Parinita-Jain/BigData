@@ -996,19 +996,23 @@ into executable code on hdfs.
 
 
 Data model in Pig-- We have scalar data types and complex datatypes.
-Scalar datatypes eg --integer , long, float, double, char array, byte array
+Scalar datatypes eg --integer , long, float, double, chararray fortext data, byte array- for storing binary data like image,videos,etc.
 complex datatypes-- maps- which are key-value pairs eg. ["name"#"Jane","Age"#35]
 
-Tuple--(35,17,"Jane")
-Bag-- contains multiple tuples.like {("Jane",35),("Fly",45)}
+Tuple--stores multiple data points into single variable-(35,17,"Jane")
+Bag-- contains multiple tuples and represents nested structure.like {("Jane",35),("Fly",45)}
 
 Pig includes the concept of data element being null.
 So if u give or don't give schema its fine.
+
+hive requires u togive schema.
+But in pig if schema is not given its fine.
+
 If schema is not given then it proecess the data
 mking the best guesses it can based on how the script treats 
 the data. 
 
-Introduction of Pig
+
 
 Feature of Pig --
 It provides severaloperations like filters, join,sort,etc.
@@ -1079,13 +1083,389 @@ duplicate data.
 mapis like an associated array.key can be of 
 string type but value can be of any type.
 
-########################-- Pig practical----
-Pig Commands 
+########################-- 1st we will do HDFS and Map reduce  practical----
+
 ---------------
+
+
 
 Start vm.
 
-Goto files folder
+Goto files folder---everything inside this folder
+is a local filesystem. This is not HDFS.
+
+Now click hadoop folder-- open hadoop-2.4.1
+--then open temp folder-- then open dfs--- 
+then open data-- if u have current folder,
+ its' alright,if u dont then too alright.
+If its there, then move it to trash by right clicking
+
+Close the file explorer and open terminal.
+
+ctrl+alt+t
+
+#first format namenode-- cmd is--
+$ hadoop namenode -format
+
+reformat  ?-y
+
+#Now we know hdfs is a filesystem
+#and so we will start everything-- 
+#hadoop,yarn,etc
+
+$start-all.sh
+
+#now hadoop is a filesystem ,
+so we can create folder. Folder 
+is called directory.
+
+#to create a new directory--
+hdfs dfs -mkdir <path to directory>
+
+now / is a root directory and 
+is created by default. 
+
+eg--
+$ hdfs dfs -mkdir /mydir
+
+#now to create folder inside mydir--
+$ hdfs dfs -mkdir /mydir/newdir
+
+Now since we have created folder,so we will put file 
+into it-- so, lets say we have inour home directory
+which is a local file sytem,file called sample.txt
+
+To send a file from Local File System to HDFS
+
+hdfs dfs -put <source path> <destination path>
+hdfs dfs -put /home/bigdata/samplefile.txt /mydir
+
+#now how we will know that this file reached hdfs.
+So to see any folder's content,
+
+i.e To list the contents of directory:
+$hdfs dfs -ls <path to directory>
+$hdfs dfs -ls /mydir
+
+
+Now,To see the contents of a file:
+$hdfs dfs -cat <path to file>
+$hdfs dfs -cat /mydir/samplefile.txt
+
+
+#To send a file from HDFS to Local File System
+$hdfs dfs -get <source path> <destination path>
+$hdfs dfs -get /mydir/samplefile.txt /home/bigdata/result.txt
+
+
+To delete a directory
+$hdfs dfs -rm -r <path to directory>
+$hdfs dfs -rm -r /mydir
+So,the above cmd deletes mydir directory from hdfs.
+
+U can see bigdata_cheatsheet.pdf shared in folder.
+U can look at the syntax.
+
+Then we will do map reduce--
+So there is this file mapreduce_practical.pdf 
+in folder. U r not suppoed to run all the commands
+as we have already done installation.
+
+But the code that we will write on mapper and 
+reducer which will be in python only,
+that code is available in the pdf.
+
+So,next wee will write a map-reduce prgram
+for wordcount problem.
+
+SO first creating files using touch command.
+
+$touch mapper.py
+# this will create a new file in local filesystem,
+with name mapper.py
+
+# remember map-reduce has 3 phase--
+mapper in which we create key-value pair,
+shuffle phase in which we sort key-value 
+pairs based on keys.
+reduce phase--in which we aggregate the values.
+add,multply anything.
+
+Now weare supposed to write codefor 
+mapper and reducer. Shuffle phase happens on its own.
+
+In your lfs,u will get inside home folder-- mapper.py
+click on it and editor will open.
+
+Now,1st we are supposed to write the path ofthe 
+python , where the version of python which we 
+are going to use is  present,which will execute the code.
+
+#!/usr/bin/python
+"""mapper.py"""
+import sys---sys is a builtin module
+for line in sys.stdin: ----sys.stdin -- on whichever file this mapper.py will run, the input data is fetched with the help of stdin
+	line=line.strip()--- for removing extra space
+	words=line.split()
+	for word in words:
+		print('%s\t%s'%(word,1))--- in mapper phase, key is a word and value is 1. So we are printing it like key tab value 
+
+Save and close the file.
+
+
+Now go back to the terminal.
+
+Wewantto give read write permissions to this file so that hdfs is able to accessit.
+
+$ sudo chmod 777 /home/bigdata/mapper.py
+
+password of virtual machine
+
+Now we are done with mapper.py. Now we will make reducer.py
+
+$ touch reducer.py
+
+
+The mapper which we have written ,after shuffle
+will be given to reducer. 
+
+#!/usr/bin/python
+'''reducer.py'''
+import sys
+# logic is we will continuously check if prev_word and new 
+#word are same, then prev_count should increase.
+# so at the start prev_word is set to none and count to 0.
+prev_word=None
+prev_count=0
+for line in sys.stdin:
+	line=line.strip()
+	word,count = line.split('\t')#--- spliton \t because key value pair are seperrated by tab. So on splitting we are getting word and count. Now this count is of string type, So convert to int tye. 
+	count=int(count)
+	# if prev_word=current word-- then add into count
+	if prev_word == word:
+		prev_count += count
+	# if prev_word != current word-- then we need to check if prev word was even ther, for eg in case of 1st word,no previous word is there.
+	else:
+		if prev_word: # if previous word is there, and not = curr word, thenwe have already counted previous word,and we will simply print count of previous word.
+			print('s%s\t%s'%(prev_word,prev_count))
+		# now since we are inside loop, so current word becomes previous word and current count becomes previous count.
+		prev_count = count
+		prev_word = word
+# now the only possibility left is --second last word and last word are same,then
+#our earlier if condition inside loop is getting true,the only thing is,it is not printing count.So we will write logic for printing.
+if prev_word == word:
+	print('%s\t%s'%(prev_word,prev_count))
+
+
+Save and close the file
+
+Now come to terminal and give permissions--
+
+$ sudo chmod 777 /home/bigdata/reducer.py
+pwd of vm.
+
+Now we have mapper and reducer.Now we need data on which we will run them--
+
+So,wewill first put samplefie.txt on hdfs and then we will runit.
+So first putting this file into mydir directory in hdfs.
+
+$ hdfs dfs -mkdir /mydir
+$ hdfs dfs -put /home/bigdata/samplefile.txt /mydir
+
+Now we have our data,mapper reducer evrything.
+So to run map reduce code, we are supposed to run a jar file.
+
+The syntax for that is--
+
+hadoop jar <path to jar file> -mapper <path
+to mapper file> -reducer <path to reducer
+file> -input <path to input data> -output
+<path to output directory> 
+
+Now <path to output directory> should not be an existing hdfs directory. 
+It will be a new directory. Map reduce will create that path.
+
+Now, in the above syntax, <path to jar file> is a haddop streaming jar file.
+its path is in folder home-hadoop-share-hadoop-tools-lib (scroll down)
+ -- hadoop streaming 2.4.1.jar (version can be diff)--this path we will give,
+
+mapper path we know.
+
+reducer path we know
+
+input data is in /mydir
+
+and output path will be new, which is not pre-existing.
+
+So,open terminal--
+
+$hadoop jar /home/bigdata/hadoop/share/hadoop/tools/lib/hadoop-streaming-2.4.1.jar -mapper /home/bigdata/mapper.py -reducer /home/bigdata/reducer.py -input /mydir/samplefile.txt -output /myoutput
+
+Now we can see the output. So for that in terminal--
+
+$ hdfs dfs -ls /myoutput
+
+Now, 2 files are there on output.
+1 is success which is an empty file. Its just an indication that map-reduce program has run properly.
+2 part-00000 contains our actual o/p. So we will see what is inside it--
+
+$ hdfs dfs -cat /myoutput/part-00000
+
+in the output we will see wordcount like--
+
+,		3
+analytics	3
+Big		2
+Data		2
+Text		1
+
+
+Now if u want to delete these directories which are created--
+
+$ hdfs dfs -rm -r /myoutput
+
+$ hdfs dfs -rm -r /mydir
+
+$ stop-all.sh
+
+then closethe terminal, close vm.
+
+#################### we are done with hdfs and map reduce practical. Next we will do pig and hive practical.
+
+Revision diff components in Apache pig-- 1st wewrite scripts in pig latin and submit it
+then parser optimizer compiler and execution engine.
+
+then data model of apache pig-- scalar and complex. 
+
+######practical of apache pig and apache hive---
+
+So start VM.
+
+Open files folder of ubuntu.
+
+within files ,open hadoop(if u have installed hadoop , then only u will have it)
+-- hadoop-2.4.1 --temp --dfs --data --whatever uhave inside this folder move to trash.
+
+open terminal--
+
+#format namenode first--
+$ hadoop namenode -format
+reformat ?y
+
+#starting hdfs----
+$ start-all.sh
+
+# not putting file user_data.csv into hdfs.So first we will create directory
+$ hdfs dfs -mkdir /mydir
+$ hdfs dfs -put /home/bigdata/user_data.csv /mydir
+
+Now first let see hive to get familiar with.
+$ hive -------------------------------------- this will start hive shell
+
+# executing every cmd willnot be possible. So u can see bigdata cheatsheet.
+
+> show databases;
+> create database MyDataBase;
+> use MyDataBase;
+
+> create table user(user_id bigint, gender string, age int, estimatedsalary int, purchased int) row
+format delimited fields terminated by ‘,’ stored as textfile;
+
+#now normally in sql, we stop after tablename and schema. 
+# but in hive-- we give info regarding how this data is
+#supposed to be stored in hdfs.
+#row wise, now file is a csv file, so delimiter is ','
+# having value for different fields.
+# in hdfs , csv file is considered as a text file.
+
+#now this table is managed table as we have not mentioned storage location.
+
+> describe user;
+
+# so now we have table. We will load data inside this table.
+> load data inpath '/mydir/user_data.csv' into table user;
+> select * from user; ------- if the data is not properly comma sep,then we get the NULL values
+
+> truncate table user;
+
+> select * from user;
+
+> drop table user;
+# now because this is a managed table,the filein hdfs also get deleted. 
+
+> select * from user;
+
+> drop database MyDataBase;
+
+> show databases;
+
+> exit  
+
+#--------- exit from hive.
+
+############now we will do practical for pig----
+
+# for pig we will require folders and files again.So,
+
+$ hdfs dfs -put /home/bigdata/user_data.csv /mydir
+
+# starting pig grunt shell
+$ pig
+
+Now here we will store data in variables.
+So, lets say the variable is user ,
+
+grunt> user = load '/mydir/user_data.csv' using PigStorage(',') as (user_id:long,
+gender:chararray, age:int, estimatedsalary:long, pruchased:int);
+
+# these variables are called relations.now to see schema of relation user-- 
+grunt> describe user;
+
+
+#now to see the data
+> dump user;
+
+# we can run diff queries on the data. filter, sort,etc
+# and the final result u can store back in hdfs.
+
+# store variable name into path where we want to store the output. 
+# This path directory should be new, so we cannot write mydir here because it is preexisting.
+# the map reduce code will create this directory. 
+
+> store user into '/pig_output' using PigStorage(',');
+
+# now once this is compleed, we have our data in hdfs and then we wil quit grunt shell.
+> quit;
+
+#now to see the output in hdfs--
+
+# 1st we will see the cntent of root directory
+$ hdfs dfs -ls /
+
+# our focus is on pig_output. So,
+
+$ hdfs dfs -ls /pig_output
+
+# now we are interesed in part-m-00000 and not on success. So,
+$ hdfs dfs -cat /pig_output/part-m-00000
+
+we will see data as our o/p.
+
+#now the cmds of pig and hive have ; but hdfs cmds doesn't have ;.
+
+# so after this we can just stp this.
+
+$ stop-all.sh
+
+Now u can close everyting.
+
+ 
+
+
+
+
+
+
 
 ############################################
 Features of Hive 
