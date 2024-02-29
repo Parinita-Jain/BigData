@@ -112,7 +112,7 @@ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 save close
 
 #now open terminaland write-- 
-sudo gedit /home/bigdata/.bashr
+sudo gedit /home/bigdata/.bashrc
 enter your pwd.
 file will open.Ignore warnings.
 Scroll to end and add the lines--
