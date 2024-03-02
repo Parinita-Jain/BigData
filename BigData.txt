@@ -284,11 +284,11 @@ rename to-- hive-site.xml ---double click on it--
 press ctrl F in file and search for-- hive.metastore.uris--
 
 #approx lineno. 328--
-<name>hive.metastore.urls</name>
+<name>hive.metastore.uris</name>
 <value>thrift://localhost:9083</value>
 
 press ctrlF --hive.metastore.schema.verification
-approx line 530--
+approx line 530-- the value here is false. If it is true then change it to false.
 <value>false</value>
 
 ctrlF-- hive.supported.concurrency
