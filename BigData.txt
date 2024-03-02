@@ -268,9 +268,11 @@ files--hive folder-- conf--
 select hive-env.sh -- right click--  copy-- paste
 click again to copied file-- rename-- hive-env.sh
 now double click-- line no.48--
+remove # and write--
 HADOOP_HOME=/home/bigdata/hadoop
 
 line 51--
+remove # and write--
 export HIVE_CONF_DIR=/home/bigdata/hadoop/etc/hadoop
 
 save and close
